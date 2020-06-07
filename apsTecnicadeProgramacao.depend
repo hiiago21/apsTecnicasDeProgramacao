@@ -7,18 +7,18 @@
 	<conio.h>
 	<locale.h>
 
-1590614878 source:c:\users\hiiag\desktop\faculdade\faculdade\tecnicas de programação\apstecnicadeprogramacao\utilidades.c
+1591553205 source:c:\users\hiiag\desktop\faculdade\faculdade\tecnicas de programação\apstecnicadeprogramacao\utilidades.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<conio.h>
 	<locale.h>
 
-1590614668 c:\users\hiiag\desktop\faculdade\faculdade\tecnicas de programação\apstecnicadeprogramacao\lib\utilidade.h
+1590692787 c:\users\hiiag\desktop\faculdade\faculdade\tecnicas de programação\apstecnicadeprogramacao\lib\utilidade.h
 
 1590614888 c:\users\hiiag\desktop\faculdade\faculdade\tecnicas de programação\apstecnicadeprogramacao\lib\menujogo.h
 
-1590614767 source:c:\users\hiiag\desktop\faculdade\faculdade\tecnicas de programação\apstecnicadeprogramacao\menujogo.c
+1591551983 source:c:\users\hiiag\desktop\faculdade\faculdade\tecnicas de programação\apstecnicadeprogramacao\menujogo.c
 	"lib/utilidade.h"
 	<stdio.h>
 	<stdlib.h>

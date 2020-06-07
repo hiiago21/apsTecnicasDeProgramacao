@@ -6,5 +6,8 @@ void PerguntasFaceis();
 void PerguntasMedias();
 void PerguntasDificeis();
 void gravaPerguntas();
+void insereRanking();
+void ranking();
+void bubbleSort(int* pontuacao, char nomes[10][15], int tamanho);
 
 #endif // UTILIDADE_H_INCLUDED

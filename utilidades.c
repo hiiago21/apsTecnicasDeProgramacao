@@ -11,7 +11,7 @@ void limpaTela() {
 typedef struct faceis{char a[200], r[2],p[2];}facil;
 typedef struct medias{char a[200], r[2],p[2];}media;
 typedef struct dificeis{char a[200], r[2],p[2];}dificil;
-
+typedef struct{char questao[200],resposta[2],tipo[2];} pergunta;
 
 facil pfacil[20];
 media pmedia[20];
@@ -59,55 +59,158 @@ void PerguntasDificeis(){
     };
 
 void gravaPerguntas(){
+    pergunta p[1];
     char escolha;
     printf("Qual nivel de pergunta gostaria de inserir?\n");
     printf("F - Fácil\nM - Médio\nD - Difícil");
-    scanf("%c", &escolha);
-    printf("\nInsira o nivel aqui: "); scanf("%c", &escolha);
+    fflush(stdin);
+    printf("\nInsira o nivel aqui: ");
+    scanf_s("%s", &p->tipo );
 
+    fflush(stdin);
+    printf("Insira a pergunta aqui: ");
+    fgets(&p -> questao, 200, stdin);
 
-    printf("%c", escolha);
-
-    char pergunta[200];
-    setbuf(stdin,0);
-    printf("\nInsira a pergunta aqui: ");
-    fgets(pergunta, 200, stdin);
-
+    fflush(stdin);
     printf("Insira a resposta aqui: ");
-    char resposta;
-    scanf("%c", &resposta);
+    fgets(&p -> resposta,2,stdin);
 
-    if(escolha == 'f' || escolha == 'F'){
+    if(p[0].tipo[0] == 'f' || p[0].tipo[0] == 'F'){
         FILE *fp;
-        fp = fopen("PerguntasFaceis.txt","a");
+        fp = fopen("./PerguntasFaceis.txt","a");
+        if(fp==NULL){
+            printf("erro em executar arquivo");
+        }
+        printf("%s%s", &p->resposta , &p->questao);
+       fprintf(fp,"%s%s", &p->resposta , &p->questao);
+
+       fclose(fp);
+
+    }else if(p[0].tipo[0]== 'm' || p[0].tipo[0] == 'M'){
+        FILE *fp;
+        fp = fopen("./PerguntasMedias.txt","a");
         if(fp==NULL){
             printf("erro em executar arquivo");
         }
 
-       fprintf(fp,"%c%s", resposta,pergunta);
-
+       fprintf(fp,"%s%s", p->resposta,p->questao);
        fclose(fp);
 
-    }else if(escolha == 'm' || escolha == 'M'){
-        FILE *fp;
-        fp = fopen("PerguntasMedias.txt","a");
-        if(fp==NULL){
-            printf("erro em executar arquivo");
-        }
-
-       fprintf(fp,"%c%s", resposta,pergunta);
-       fclose(fp);
-
-        }else if(escolha == 'd' || escolha == 'D'){
+        }else if(p[0].tipo[0] == 'd' || p[0].tipo[0] == 'D'){
             FILE *fp;
-            fp = fopen("PerguntasDificeis.txt","a");
+            fp = fopen("./PerguntasDificeis.txt","a");
             if(fp==NULL){
                 printf("erro em executar arquivo");
             }
 
-            fprintf(fp,"%c%s", resposta,pergunta);
+            fprintf(fp,"%s%s", p->resposta,p->questao);
             fclose(fp);
 
             }
-    return 0;
+
+
+    printf("O que deseja fazer\n 1 - Menu Inicial \n 2 - Inserir outra pergunta \n 3 - Sair \n Escolha e aperte Enter: ");
+    int opcao;
+    scanf("%d", &opcao);
+    if(opcao ==1){
+        limpaTela();
+        menuJogo();
+    }else if(opcao ==2){
+        limpaTela();
+        gravaPerguntas();
+      }else{
+            return 0;
+        }
+}
+
+
+void insereRanking(char nome[15], int pontuacao) {
+    FILE *fp;
+
+    fp = fopen("RankingTeste.txt", "a");
+
+    if (fp == NULL) {
+        printf("Erro em abrir o arquivo");
+    }
+
+    else{
+        fprintf(fp,"%d%s", pontuacao, nome);
+    }
+    fclose(fp);
+    printf("Foi inserido %d e %s", pontuacao, nome);
+}
+
+
+
+//algoritmo de sort, perceba que aqui eu ordeno os dois vetores (nome e pontuação)
+
+void bubbleSort(int* pontuacao, char nomes[10][15], int tamanho)
+{
+    int i;
+    int trocou;
+    do
+    {
+        trocou = 0;
+    for (i=tamanho-1; i > 0; i--)
+    {
+        if (pontuacao[i] > pontuacao[i-1])
+        {
+            int pAux;
+            char nAux[255];
+            pAux = pontuacao[i];
+            strcpy(nAux, nomes[i]);
+            pontuacao[i] = pontuacao[i-1];
+            strcpy(nomes[i], nomes[i-1]);
+            pontuacao[i-1] = pAux;
+            strcpy(nomes[i-1], nAux);
+            trocou = 1;
+        }
+    }
+
+    }while (trocou);
+}
+
+
+
+void ranking(){
+
+    //system("clear");
+    printf("\n ######- Ranking de Jogadores -######\n");
+    printf("  \n");
+    printf(" NOME - PONTOS \n");
+    printf("  \n");
+
+    // cria ponteiro de arquivo
+    FILE * pont_arq;
+    //abrindo o arquivo_frase em modo "somente leitura"
+    pont_arq = fopen("RankingTeste.txt", "r");
+    // cria matriz para 10 nomes (poderia ser dinamico) e array de pontuações
+    char nomes[10][15];
+    int pontuacoes[10];
+    //variaveis que irá receber o nome ea pontuação do arquivo
+    char nome[15];
+    int pontuacao;
+    //quantidade de jogadores
+    int tamanho = 0;
+
+    //lê do arquivo
+    while(fscanf(pont_arq, "%d   %s\n",  &pontuacao, nome) != EOF)
+    {
+        strcpy(nomes[tamanho],nome);
+        pontuacoes[tamanho] = pontuacao;
+        tamanho++;
+    }
+
+    //Ordena
+    bubbleSort(pontuacoes, nomes, tamanho);
+
+    //Imprime
+    int i;
+    for (i=0; i<tamanho; i++)
+    {
+        printf("%s %d\n", nomes[i], pontuacoes[i]);
+    }
+
+    fclose(pont_arq);
+    printf("\n");
 }

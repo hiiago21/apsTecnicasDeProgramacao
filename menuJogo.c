@@ -7,10 +7,10 @@
 
 void menuJogo(){
     setlocale(LC_ALL, "Portuguese");
-    char jogA[20], jogB[20];
+    char jogA[15], jogB[15];
     int ptA=0, ptB=0;
     int opcaoEscolhida = 0;
-    while(opcaoEscolhida < 1 || opcaoEscolhida > 3){
+    while(opcaoEscolhida < 1 || opcaoEscolhida > 5){
     void limpaTela();
 
     printf("Bem-Vindo ao Quiz\n\n\n");
@@ -28,44 +28,42 @@ void menuJogo(){
             printf("Digite o nome dos jogadores\n");
             printf("Jogador 1: ");
             setbuf(stdin,0);
-            fgets(jogA, 20, stdin);
+            fgets(jogA, 15, stdin);
 
             printf("Jogador 2: ");
             setbuf(stdin,0);
-            fgets(jogB, 20, stdin);
+            fgets(jogB, 15, stdin);
 
-       Jogo(jogA, &ptA, jogB, &ptB);
+       Jogo(jogA, ptA, jogB, ptB);
 
         break;
 
         case 2:
             gravaPerguntas();
+            break;
+        case 3:
+            ranking();
             printf("O que deseja fazer\n 1 - Menu Inicial \n 2 - Sair \n Escolha e aperte Enter: ");
             int opcao;
             scanf("%d", &opcao);
             if(opcao ==1){
                 limpaTela();
                 menuJogo();
-                }else{
-                   break;
-                }
-            break;
-
-        case 3:
-            //ranking
+            }else{
+                break;
+             }
             break;
 
         case 4:
             printf("\n\nJogo desenvolvido por:\nHiago Silva da Silva\nLeonardo Oliveira de Farias\nGabriel Luis Mendes\n");
-                   printf("O que deseja fazer\n 1 - Menu Inicial \n 2 - Sair \n Escolha e aperte Enter: ");
-                    opcao;
-                   scanf("%d", &opcao);
-                   if(opcao ==1){
-                       limpaTela();
-                        menuJogo();
-                   }else{
-                   break;
-                   }
+            printf("O que deseja fazer\n 1 - Menu Inicial \n 2 - Sair \n Escolha e aperte Enter: ");
+            scanf("%d", &opcao);
+            if(opcao ==1){
+                limpaTela();
+                menuJogo();
+            }else{
+                break;
+            }
         break;
 
         case 5:
@@ -84,13 +82,13 @@ facil pfacil[20];
 media pmedia[20];
 dificil pdifi[20];
 
-void Jogo(char jogA[20], int *ptA, char jogB[20], int *ptB ){
+void Jogo(char jogA[20], int ptA, char jogB[20], int ptB ){
         system("cls");
         int cont = 0;
-
+        srand(time(NULL));
 
   //perguntas fáceis
-        for(int j = 0; j<2; j++){
+        for(int j = 0; j<0; j++){
         PerguntasFaceis();
         printf("Perguntas fáceis\n");
 
@@ -111,7 +109,7 @@ void Jogo(char jogA[20], int *ptA, char jogB[20], int *ptB ){
         }
         fflush(stdin);
         system("pause");
-        system("cls");
+        limpaTela();
         cont++;
        }
 
@@ -132,14 +130,14 @@ void Jogo(char jogA[20], int *ptA, char jogB[20], int *ptB ){
         }
         fflush(stdin);
         system("pause");
-        system("cls");
+        limpaTela();
         cont--;
         }
         }
 
      //perguntas medias
 
-        for(int j = 0; j<2; j++){
+        for(int j = 0; j<0; j++){
         PerguntasMedias();
         printf("Perguntas Medias\n");
 
@@ -159,7 +157,7 @@ void Jogo(char jogA[20], int *ptA, char jogB[20], int *ptB ){
         }
         fflush(stdin);
         system("pause");
-        system("cls");
+        limpaTela();
         cont++;
         }
 
@@ -179,7 +177,7 @@ void Jogo(char jogA[20], int *ptA, char jogB[20], int *ptB ){
         }
         fflush(stdin);
         system("pause");
-        system("cls");
+        limpaTela();
         cont--;
         }
         }
@@ -208,7 +206,7 @@ void Jogo(char jogA[20], int *ptA, char jogB[20], int *ptB ){
         }
         fflush(stdin);
         system("pause");
-        system("cls");
+        limpaTela();
         cont++;
         }
 
@@ -221,27 +219,40 @@ void Jogo(char jogA[20], int *ptA, char jogB[20], int *ptB ){
         int x = strcmp(pdifi[h].p,pdifi[h].r);
         if(x == 0){
             printf("Resposta certa\n");
-            ptA = ptA+4;
+            ptB = ptB+4;
         }else{
             printf("Errou!!\n");
-            ptA = ptA-4;
+            ptB = ptB-4;
         }
         fflush(stdin);
         system("pause");
-        system("cls");
+        limpaTela();
         cont--;
         }
 
         }
 
         if(ptA > ptB){
-            printf("A ganhou");
-        }else if(ptB>ptA){
-            printf("B ganhou");
+            printf("\n----------- Ganhou com pontuação de %d foi %s", ptA,jogA);
+            insereRanking(jogA,ptA);
+        }else if(ptB > ptA){
+            printf("\n----------- Ganhou com pontuação de %d foi %s", ptB,jogB);
+            insereRanking(jogB,ptB);
         }else{
-            printf("Empate");
+            printf("*************** Empate sem pontuação *************\n");
         }
-//    insereRanking()
+
+        printf(" O que deseja fazer:\n(1)- Menu principal \n(2) - Jogar novamente \n(3) - Sair?\n");
+        int opc;
+        scanf("%d", &opc);
+        if(opc == 1){
+            menuJogo();
+        }else if(opc == 2){
+            Jogo(jogA,ptA,jogB,ptB);
+        }else{
+            return;
+        }
+
 };
 
 

@@ -17,6 +17,5 @@ vO filme A Teoria de Tudo, conta a historia de Stephen Hawkings
 vO nome de The Rock e Dwayne Johnson
 vGremio foi campeao mundial em 1983
 fNa copa do mundo no Brasil, a selecao da Alemanha levou uma goleada de 7 a 1 do Brasil
-fOs arquivos txt se referem a arquivos do tipo imagem \0
+fOs arquivos txt se referem a arquivos do tipo imagem
 
-1dsoia
