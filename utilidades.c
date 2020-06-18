@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <locale.h>
 
+//função apenas para facilitar a limpeza das telas
 void limpaTela() {
     system("CLS");
 }
@@ -17,7 +18,8 @@ facil pfacil[20];
 media pmedia[20];
 dificil pdifi[20];
 
-
+//aqui são as 3 funções destinadas para abertura leitura das perguntas
+//estas função são usada na função jogo pois conforme o jogo anda muda o nivel das perguntas
 void PerguntasFaceis(){
     FILE *fp;
     fp = fopen("PerguntasFaceis.txt","rt");
@@ -57,6 +59,11 @@ void PerguntasDificeis(){
     }
     fclose(fp);
     };
+
+//esta é a função da opção 3 do menu ela passa as informações pro usuario inserir uma nova pergunta
+//ele solicita o nivel que ele quer para poder escolher qual arquivo deseja abrir
+// após isto solicita a pergunta e sua resposta as gravas em um struct
+// abre o arquivo as inseri e o fecha
 
 void gravaPerguntas(){
     pergunta p[1];
@@ -123,7 +130,7 @@ void gravaPerguntas(){
         }
 }
 
-
+// esta função é usada ao final do jogo para inserir o ganhador da partida no ranking
 void insereRanking(char nome[15], int pontuacao) {
     FILE *fp;
 

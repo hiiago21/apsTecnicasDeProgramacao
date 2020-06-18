@@ -1,0 +1,6 @@
+Regras do Jogo:
+Este é um quiz de pergutas e respostas, o qual são 7 pergntas para cada jogador, definidas em:
+2 fáceis valendo 1pt
+2 medias velendo 2pt
+3 dificeis valendo 4pt
+Para cada erro o numero de pontos perdidos é o mesmo que os ganhos. Ao final o ganhador se impresso na tela.

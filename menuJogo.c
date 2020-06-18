@@ -10,7 +10,7 @@ void menuJogo(){
     char jogA[15], jogB[15];
     int ptA=0, ptB=0;
     int opcaoEscolhida = 0;
-    while(opcaoEscolhida < 1 || opcaoEscolhida > 5){
+    while(opcaoEscolhida > 1 || opcaoEscolhida < 5){
     void limpaTela();
 
     printf("Bem-Vindo ao Quiz\n\n\n");
@@ -23,7 +23,10 @@ void menuJogo(){
     printf("\nDigite da opção e aperte Enter:");
     scanf("%d", &opcaoEscolhida);
 
+    //Abertura do jogo aqui aonde escolhemos o que desejamos fazer no jogo
      switch(opcaoEscolhida){
+        //nesta opção definimos os nomes dos dois jogadores e passamos o nome do jogador
+        //e a pontuação inicial
         case 1:
             printf("Digite o nome dos jogadores\n");
             printf("Jogador 1: ");
@@ -39,6 +42,7 @@ void menuJogo(){
         break;
 
         case 2:
+            //chamamos a função que iraá gravar as perguntas
             gravaPerguntas();
             break;
         case 3:
@@ -55,6 +59,7 @@ void menuJogo(){
             break;
 
         case 4:
+            limpaTela();
             printf("\n\nJogo desenvolvido por:\nHiago Silva da Silva\nLeonardo Oliveira de Farias\nGabriel Luis Mendes\n");
             printf("O que deseja fazer\n 1 - Menu Inicial \n 2 - Sair \n Escolha e aperte Enter: ");
             scanf("%d", &opcao);
@@ -82,13 +87,21 @@ facil pfacil[20];
 media pmedia[20];
 dificil pdifi[20];
 
+//no jogo fazemos a abertura do arquivo com o carregamento das perguntas
+//geramos um randomico para as perguntas nao serem repetidas
+// e guardamos as mesma em uma struct
+//jogador acertando ganha pontuação errando perde a pontuação
+//ao final verificamos o vencedor pela pontuação e chamamos
+//as funções inserir no ranking com o nome e apontuação
+// após passamos opção de jogar novamente com os mesmos participantes ou reiniciar todo jogo
+
 void Jogo(char jogA[20], int ptA, char jogB[20], int ptB ){
         system("cls");
         int cont = 0;
         srand(time(NULL));
 
   //perguntas fáceis
-        for(int j = 0; j<0; j++){
+        for(int j = 0; j<4; j++){
         PerguntasFaceis();
         printf("Perguntas fáceis\n");
 
@@ -137,7 +150,7 @@ void Jogo(char jogA[20], int ptA, char jogB[20], int ptB ){
 
      //perguntas medias
 
-        for(int j = 0; j<0; j++){
+        for(int j = 0; j<4; j++){
         PerguntasMedias();
         printf("Perguntas Medias\n");
 
@@ -186,7 +199,7 @@ void Jogo(char jogA[20], int ptA, char jogB[20], int ptB ){
 
           //perguntas dificeis
 
-        for(int j = 0; j<2; j++){
+        for(int j = 0; j<6; j++){
         PerguntasDificeis();
         printf("Perguntas Medias\n");
 
